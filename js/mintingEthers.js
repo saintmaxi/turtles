@@ -39,7 +39,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum,"any");
 const signer = provider.getSigner();
 const turtles = new ethers.Contract(turtlesAddress, turtlesAbi(), signer);
 
-const merkleProofSourceUrl = "";
+const merkleProofSourceUrl = "https://api.nonfungiblecdn.com/cyberturtles/merkleproofs";
 
 var whitelistIsLive;
 var publicIsLive;

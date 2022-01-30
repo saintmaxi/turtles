@@ -31,7 +31,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum,"any");
 const signer = provider.getSigner();
 const turtles = new ethers.Contract(turtlesAddress, turtlesAbi(), signer);
 
-const merkleProofSourceUrl = "";
+const merkleProofSourceUrl = "https://api.nonfungiblecdn.com/cyberturtles/ogproofs";
 
 const connect = async()=>{
     await provider.send("eth_requestAccounts", []);
