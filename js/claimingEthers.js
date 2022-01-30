@@ -107,7 +107,7 @@ const updateMintInfo = async() => {
     let minted = Number(await turtles.totalSupply());
     $("#num-minted").text(minted);
     if (minted == MAX_SUPPLY) {
-        $("#sold-out").html(`SOLD OUT. <br><br>AVAILABLE ON <a href="" target="_blank" class="w-inline-block" style="text-decoration:none;color:blue;">OPENSEA⬈</a> & <a href="" target="_blank" class="w-inline-block" style="text-decoration:none;color:green;">LOOKSRARE⬈</a>`);
+        $("#sold-out").html(`SOLD OUT. <br><br>AVAILABLE ON <a href="https://opensea.io/collection/cyberturtles-genesis" target="_blank" class="w-inline-block" style="text-decoration:none;color:blue;">OPENSEA⬈</a> & <a href="https://looksrare.org/collections/0x99EcdF17DED4fCb6C5f0fE280d21f832af464f67" target="_blank" class="w-inline-block" style="text-decoration:none;color:green;">LOOKSRARE⬈</a>`);
         $("#mint-button").remove();
         $("#mint-n-stake-button").remove();
     }
