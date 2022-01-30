@@ -1,0 +1,37 @@
+
+.turtle-id, .shell-earned {
+    color: black;
+    margin-bottom: 0px;
+  }
+  
+  .your-turtle:hover {
+    transform: translate(0, -5px);
+  }
+  
+  
+  .your-turtle:hover .turtle-id, .your-turtle:hover .shell-earned {
+    color: #629658 !important;
+  }
+  
+  .your-turtle img {
+    border: 5px solid black;
+  }
+  
+  .your-turtle:hover img {
+    border-color: #629658;
+    cursor: pointer;
+  }
+  
+  .active img, .active p{
+    border-color: #629658;
+    color: #629658 !important;
+  }
+
+  .selected {
+    color: black;
+  }
+
+  .active img, .active p{
+    border-color: #629658;
+    color: #629658 !important;
+  }

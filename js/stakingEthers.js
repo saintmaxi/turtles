@@ -110,7 +110,7 @@ const getStakedTurtlesOwned = async() => {
 
 const getShellBalance = async()=>{
     let userAddress = await getAddress();
-    return (formatEther(await shell.balanceOf(userAddress)));
+    return (Number(formatEther(await shell.balanceOf(userAddress))).toFixed(2));
 };
 
 const getPendingShellBalance = async()=>{
@@ -156,6 +156,25 @@ const stakeTurtlesToShell = async()=>{
     }
 };
 
+const stakeAll = async()=>{
+    if ((await getTurtlesEnum()) == 0) {
+        displayErrorMessage("No available turtles to stake!")
+    }
+    else {
+        const turtlesArray = await getTurtlesOwned();
+    
+        await stakedTurtles.stakeTurtles(turtlesArray).then( async(tx_) => {
+            for (let i = 0; i < turtlesArray.length; i++) {
+                $(`#turtle-${turtlesArray[i]}`).remove();
+            }
+            selectedForStaking = new Set();
+            $("#selected-for-staking").text("None");
+            $("#your-turtles").html(`Your Available Turtles (<span class="one">.</span><span class="two">.</span><span class="three">.</span>)`);
+            await waitForTransaction(tx_);
+        });
+    }
+};
+
 const unstakeByIds = async()=>{
     const numStaked = await getStakedTurtlesEnum();
     if (numStaked == 0) {
@@ -179,9 +198,27 @@ const unstakeByIds = async()=>{
     }
 }
 
+const unstakeAll = async()=>{
+    const numStaked = await getStakedTurtlesEnum();
+    if (numStaked == 0) {
+        displayErrorMessage("No turtles staked!")
+    }
+    else {
+        const turtlesArray = await getStakedTurtlesOwned();
+        await stakedTurtles.unstakeTurtles(turtlesArray).then( async(tx_) => {
+            for (let i = 0; i < turtlesArray.length; i++) {
+                $(`#turtle-${turtlesArray[i]}`).remove();
+            }
+            selectedForUnstaking = new Set();
+            $("#selected-for-unstaking").text("None");
+            $("#shell-to-claim").text(`$SHELL to Claim: 0`);
+            $("#your-staked-turtles").html(`Your Staked Turtles (<span class="one">.</span><span class="two">.</span><span class="three">.</span>)`);
+            await waitForTransaction(tx_);
+        }); 
+    }
+}
+
 var currentlyStaked = [];
-
-
 
 const getTurtleImages = async()=>{
     $("#available-turtle-images").empty();
@@ -220,9 +257,9 @@ const getTurtleImages = async()=>{
             if (selectedForUnstaking.has(Number(turtleId))) {
                 active = "active";
             }
-            let shellEarned = formatEther(Number(await stakedTurtles.getPendingTokens(turtleId)).toFixed(2));
+            let shellEarned = Number(formatEther(await stakedTurtles.getPendingTokens(turtleId))).toFixed(2);
             // batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForUnstaking(${turtleId})" src="${baseImageURI}${turtleId}.png"><p class="turtle-id">#${turtleId}</p><p class="shell-earned"><span id="shell-earned-${turtleId}">${shellEarned}</span></p></div>`
-            batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForUnstaking(${turtleId})" src="https://cyberturtles.gg/wp-content/uploads/2022/01/Turtle-n-traits-sample-28.png">#${turtleId}</p><p class="shell-earned"><span id="shell-earned-${turtleId}">${shellEarned}</span></p></div>`
+            batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForUnstaking(${turtleId})" src="https://cyberturtles.gg/wp-content/uploads/2022/01/Turtle-n-traits-sample-28.png"><p class="turtle-id">#${turtleId}</p><p class="shell-earned"><span id="shell-earned-${turtleId}">${shellEarned}</span></p></div>`
         
         };
         $("#staked-turtle-images").append(batchFakeJSX);
@@ -256,9 +293,9 @@ const updateClaimingInfo = async()=>{
     if ((await getChainId()) === correctChain) {
         const loadingDiv = `<div class="loading-div" id="refresh-notification">REFRESHING <br>CLAIMING INTERFACE<span class="one">.</span><span class="two">.</span><span class="three">.</span>​</div><br>`;
         $("#pending-transactions").append(loadingDiv);
-        await getTurtleImages();
         $("#your-shell").text(`${await getShellBalance()}`);
         await getPendingShellBalance();
+        await getTurtleImages();
         $("#your-staked-turtles").text(`YOUR STAKED TURTLES (${await getStakedTurtlesEnum()})`);
         $("#your-turtles").text(`YOUR AVAILABLE TURTLES (${await getTurtlesEnum()})`);
         $("#error-popup").remove();
