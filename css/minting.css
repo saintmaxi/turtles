@@ -1,0 +1,87 @@
+#quantity-controls {
+    text-align: center;
+}
+
+#max-button {
+    font-size: 26px;
+    padding: 1vw;
+    width:25%;
+  }
+  
+  #max-button {
+    min-height: 67px;
+    min-width: 185px;
+    background-image: url('../images/Group-2.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent !important;
+  }
+  
+  .increment-button {
+    width: 15%;
+    font-size: calc(25px + 3vw) !important;
+    line-height: calc(25px + 3vw) !important;
+    background-color: transparent;
+  }
+  
+  #number-to-mint {
+    font-size: calc(20px + 3vw) !important;
+    line-height: calc(20px + 3vw) !important;
+  }
+  
+  #mint-prompt {
+    width: 100%;
+    text-align: center;
+  }
+  
+  #mint-tools {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 767px) {
+
+
+    #mint-header {
+      font-size: calc(25px + 2vw) !important;
+      line-height: calc(25px + 2vw) !important;
+    }
+    
+    .mint-info {
+      font-size: calc(25px + 1vw);
+      line-height: calc(25px + 1vw);
+      margin-bottom: 0;
+    }
+
+    #quantity-controls {
+        margin-bottom: 0;
+    }
+    
+    #max-button {
+      font-size: 20px;
+      padding: 2.5vw;
+    }
+    
+    #max-button {
+        min-height: 40px;
+        min-width: 150px;
+    }
+    
+    .increment-button {
+      width: initial;
+      font-size: calc(30px + 4.5vw) !important;
+      line-height: calc(30px + 3.5vw) !important;
+      background-color: transparent;
+    }
+    
+    #number-to-mint {
+      font-size: calc(25px + 3.5vw) !important;
+      line-height: calc(25px + 3.5vw) !important;
+    }
+
+    #sold-out {
+        font-size: 3vh;
+        line-height: 3vh;
+    }
+
+}
