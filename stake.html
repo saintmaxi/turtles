@@ -37,6 +37,7 @@
       </a>
       <nav role="navigation" class="nav-menu w-nav-menu">
         <a href="#" class="nav-link w-nav-link">Home</a>
+        <a href="claim.html" class="nav-link w-nav-link">Claim</a>
         <a href="mint.html" class="nav-link w-nav-link">Mint</a>
         <a href="stake.html" aria-current="page" class="nav-link w-nav-link w--current">Stake</a>
         <div class="div-block-2">
@@ -65,6 +66,10 @@
           <div class="div-block text-center">
             <p class="paragraph">Minting 1 Cyber Turtle Genesis NFT will get you access to our games + 1 free mint per future collection. Minting 2 Cyber Turtle NFTs will get you access to our games, our alpha chat + 2 free mints per future collection. Each additional Turtle will act as an extra life in our games.</p>
           </div>
+          <div style="text-align: center;">
+            <h2>Your Earn Rate: <span id="earn-rate">-</span> $SHELL / Day</h2>
+          </div>
+          <br>
           <div class="shells">
             <div class="shell-box"><img src="images/Frame_1.svg" loading="lazy" alt="" class="image-2">
               <div class="div-block-3">
@@ -89,7 +94,7 @@
         <div class="modal modal-stake-collection">
           <div class="w-layout-grid grid">
             <div class="div-block-5">
-              <h3 class="heading-3">UNSTAKED CYBER TURTLES</h3>
+              <h3 class="heading-3">UNSTAKED CYBER TURTLES (<span id="your-turtles-num"><span class="one">.</span><span class="two">.</span><span class="three">.</span></span>)</h3>
               <div class="stake-buttons">
                 <a id="stakeAllButton" href="#" class="button-outline margin-right w-button" onclick="stakeAll()">STAKE ALL</a>
                 <a id="stakeSelectedButton" href="#" class="button-outline w-button" onclick="stakeTurtlesToShell()">STAKE SELECTED</a>
@@ -178,7 +183,7 @@
               </div>
             </div>
             <div>
-              <h3 class="heading-3">STAKED CYBER TURTLES</h3>
+              <h3 class="heading-3">STAKED CYBER TURTLES (<span id="your-staked-turtles-num"><span class="one">.</span><span class="two">.</span><span class="three">.</span></span>)</h3>
               <div class="stake-buttons">
                 <a id="unstakeallButton" href="#" class="button-outline margin-right w-button" onclick="unstakeAll()">UNSTAKE ALL</a>
                 <a id="unstakeSelectedButton" href="#" class="button-outline w-button" onclick="unstakeByIds()">UNSTAKE SELECTED</a>

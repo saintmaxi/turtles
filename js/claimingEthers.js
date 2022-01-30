@@ -9,11 +9,7 @@
 
 // const etherscanBase = `https://etherscan.io/tx/`;
 // const correctChain = 1;
-// const MAX_MINT = 10;
-// const MAX_MINT_WL = 2;
 // const MAX_SUPPLY = 5555;
-// const priceWei = "70000000000000000";
-// const priceEth = .07
 
 /*********************************************************************************/
 /********************************DEV CONFIG********************************/
@@ -26,11 +22,7 @@ const turtlesAbi = () => {
 
 const etherscanBase = `https://rinkeby.etherscan.io/tx/`;
 const correctChain = 4;
-const MAX_MINT = 10;
-const MAX_MINT_WL = 2;
 const MAX_SUPPLY = 5555;
-const priceWei = "70000000000000000";
-const priceEth = .07
 
 
 /*********************************END CONFIG************************************/
@@ -40,9 +32,6 @@ const signer = provider.getSigner();
 const turtles = new ethers.Contract(turtlesAddress, turtlesAbi(), signer);
 
 const merkleProofSourceUrl = "";
-
-var whitelistIsLive;
-var publicIsLive;
 
 const connect = async()=>{
     await provider.send("eth_requestAccounts", []);
@@ -65,45 +54,6 @@ const getChainId = async()=>{
     return await signer.getChainId()
 };
 
-function decrementClaim() {
-    let currentClaim = Number($("#number-to-mint").text());
-    if (currentClaim > 1) {
-        let newClaim = currentClaim - 1;
-        $("#number-to-mint").text(newClaim);
-    }
-}
-
-function updatePrice() {
-    let currentClaim = Number($("#number-to-mint").text());
-    $("#current-cost").text(`${(priceEth * currentClaim).toFixed(2)}`)
-}
-
-function incrementClaim() {
-    let currentClaim = Number($("#number-to-mint").text());
-    let max;
-    if (whitelistIsLive && !publicIsLive) {
-        max = MAX_MINT_WL;
-    }
-    else {
-        max = MAX_MINT;
-    }
-    if (currentClaim != max) {
-        let newClaim = currentClaim + 1;
-        $("#number-to-mint").text(newClaim);
-    }
-}
-
-const setMaxMint = async() => {
-    if (whitelistIsLive && !publicIsLive) {
-        $("#number-to-mint").text(MAX_MINT_WL);
-        $("#current-cost").text((priceEth * MAX_MINT_WL).toFixed(2))
-    }
-    else {
-        $("#number-to-mint").text(MAX_MINT);
-        $("#current-cost").text((priceEth * MAX_MINT).toFixed(2))
-    }
-}
-
 const getMerkleProof = async() => {
     const _senderAddress = await getAddress();
     const _proof = await fetch(`${merkleProofSourceUrl}/${_senderAddress}`).then(res => res.text());
@@ -111,100 +61,35 @@ const getMerkleProof = async() => {
     return _proofArray;
 };
 
-const isWhitelistOnly = async() => {
-    let whitelistLive = await turtles.whitelistMintStatus()
-    whitelistIsLive = whitelistLive;
-    return whitelistLive;
-}
-
-const isPublic = async() => {
-    let publicLive = await turtles.publicMintStatus();
-    publicIsLive = publicLive;
-    return publicLive;
-}
-
-const checkMintingLive = async() => {
-    const whitelistLive = await isWhitelistOnly();
-    const publicLive = await isPublic();
-    if (!whitelistLive && !publicLive) {
-        $("#mint-tools").addClass("hidden");
-        $("#mint-closed").removeClass("hidden");
-    }
-    else {
-        if (publicLive && whitelistLive) {
-            $("#whitelisted").html('');
-        }
-        $("#mint-tools").removeClass("hidden");
-        $("#mint-closed").addClass("hidden");
-    }
-}
-
-const checkWhitelistStatus = async() => {
-    const whitelistLive = await isWhitelistOnly();
-
-    if (whitelistLive) {
-        const _merkleProof = await getMerkleProof();
-        const addr = await getAddress();
-        const _isWhitelisted = await turtles.isWhitelisted(addr, _merkleProof).catch(err => console.log(err));
-        if (!publicIsLive) {
-            $("#whitelisted").html(_isWhitelisted ? "Congratulations, you made the whitelist!" : "Sorry, You are not Whitelisted. Please wait for our public sale.");
-        }
-        return _isWhitelisted;
-    }
+const checkOGStatus = async() => {
+    const _merkleProof = await getMerkleProof();
+    const addr = await getAddress();
+    const _isOG = await turtles.isOG(addr, _merkleProof).catch(err => console.log(err));
+    $("#og").html(_isOG ? "Congratulations, you are OG! Claim your free turtle." : "Sorry, You are not OG.");
+    return _isOG;
 };
 
-const mint = async(stakeOnMint) => {
-    const whitelistLive = await isWhitelistOnly();
-    const publicLive = await isPublic();
-    const numberToMint = Number($("#number-to-mint").text());
-
+const claim = async(stakeOnMint) => {
     try {
-        if (publicLive) {
-            if (numberToMint > MAX_MINT) {
-                await displayErrorMessage(`Max ${MAX_MINT} mints per transaction!`);
-            }
-
-            const cost = ethers.BigNumber.from(priceWei).mul(numberToMint);
-            console.log(priceWei, numberToMint, cost)
-            const gasLimit = await turtles.estimateGas.publicMint(numberToMint, stakeOnMint, {value: cost})
-            const newGasLimit = parseInt((gasLimit * 1.2)).toString();
-        
-            await turtles.publicMint(numberToMint, stakeOnMint, { value: cost, gasLimit: newGasLimit}).then( async(tx_) => {
-                await waitForTransaction(tx_);
-            });   
-        }
-        else if (whitelistLive) {
-            const whitelisted = checkWhitelistStatus();
-            if (!whitelisted){
-                await displayErrorMessage("You are not whitelisted!");
-            }
-
-            if (numberToMint > MAX_MINT_WL) {
-                await displayErrorMessage(`Max ${MAX_MINT_WL} mints for WL!`);
+            const og = checkOGStatus();
+            if (!og){
+                await displayErrorMessage("You are not OG!");
             }
     
             const merkleProof = await getMerkleProof();
-            const cost = ethers.BigNumber.from(priceWei).mul(numberToMint); 
-            const gasLimit = await turtles.estimateGas.whitelistMint(merkleProof, numberToMint, stakeOnMint, {value: cost});
+            const gasLimit = await turtles.estimateGas.ogClaim(merkleProof, stakeOnMint);
             const newGasLimit = parseInt((gasLimit * 1.2)).toString();
             
-            await turtles.whitelistMint(merkleProof, numberToMint, stakeOnMint, {value: cost, gasLimit: newGasLimit}).then( async(tx_) => {
+            await turtles.ogClaim(merkleProof, stakeOnMint, {gasLimit: newGasLimit}).then( async(tx_) => {
                 await waitForTransaction(tx_);
             });
-        }
-        else {
-            await displayErrorMessage("Minting not yet live!")
-        }
     }
     catch (error) {
-        if ((error.message).includes("Amount exceeds available for whitelist!")) {
-            await displayErrorMessage(`Error: Max ${MAX_MINT_WL} mints for WL!`)
+        if ((error.message).includes("You are not OG!")) {
+            await displayErrorMessage(`Error: You are not OG!`)
         }
-        else if ((error.message).includes("You are not Whitelisted")) {
-            await displayErrorMessage(`Error: You are not whitelisted!`)
-        }
-        else if ((error.message).includes("insufficient funds")) {
-            await displayErrorMessage(`Error: Insufficient ETH!`)
+        else if ((error.message).includes("You have already minted!")) {
+            await displayErrorMessage(`Error: You have already claimed!`)
         }
         else {
             await displayErrorMessage("An error occurred. See console and window alert for details...")
@@ -222,7 +107,6 @@ const updateMintInfo = async() => {
         $("#sold-out").html(`SOLD OUT. <br><br>AVAILABLE ON <a href="" target="_blank" class="w-inline-block" style="text-decoration:none;color:blue;">OPENSEA⬈</a> & <a href="" target="_blank" class="w-inline-block" style="text-decoration:none;color:green;">LOOKSRARE⬈</a>`);
         $("#mint-button").remove();
         $("#mint-n-stake-button").remove();
-        $("#quantity-controls").remove();
     }
 }
 
@@ -304,7 +188,6 @@ async function endLoading(tx, txStatus) {
 setInterval(async()=>{
     await updateInfo();
     await updateMintInfo();
-    await checkMintingLive();
 }, 5000)
 
 const updateInfo = async () => {
@@ -318,9 +201,8 @@ ethereum.on("accountsChanged", async(accounts_)=>{
 
 window.onload = async()=>{
     await updateInfo();
-    await checkMintingLive();
     await updateMintInfo();
-    await checkWhitelistStatus();
+    await checkOGStatus();
 };
 
 window.onunload = async()=>{
