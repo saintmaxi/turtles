@@ -50,7 +50,6 @@
   }
 
   #pending-transactions {
-    font-family: 'Montserrat';
     text-align: center;
     min-width: 20%;
     position: fixed;
@@ -92,7 +91,6 @@
 }
 
 #error-popup p, #status-popup p {
-  font-family: 'Montserrat';
     width: 100%;
     font-size: 3vw;
     line-height: 3vw;
