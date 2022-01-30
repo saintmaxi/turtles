@@ -17,6 +17,10 @@
     background-repeat: no-repeat;
     background-color: transparent !important;
   }
+
+  #og, #whitelisted {
+    font-family: 'Minecraft';
+  }
   
   .increment-button {
     width: 15%;

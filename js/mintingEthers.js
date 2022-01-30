@@ -147,7 +147,7 @@ const checkWhitelistStatus = async() => {
         const addr = await getAddress();
         const _isWhitelisted = await turtles.isWhitelisted(addr, _merkleProof).catch(err => console.log(err));
         if (!publicIsLive) {
-            $("#whitelisted").html(_isWhitelisted ? "Congratulations, you made the whitelist!" : "Sorry, You are not Whitelisted. Please wait for our public sale.");
+            $("#whitelisted").html(_isWhitelisted ? "Congratulations, you made the whitelist!" : "Sorry, you are not whitelisted. Please wait for our public sale.");
         }
         return _isWhitelisted;
     }

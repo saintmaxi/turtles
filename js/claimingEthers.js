@@ -65,7 +65,7 @@ const checkOGStatus = async() => {
     const _merkleProof = await getMerkleProof();
     const addr = await getAddress();
     const _isOG = await turtles.isOG(addr, _merkleProof).catch(err => console.log(err));
-    $("#og").html(_isOG ? "Congratulations, you are OG! Claim your free turtle." : "Sorry, You are not OG.");
+    $("#og").html(_isOG ? "Congratulations, you are OG! Claim your free turtle." : "Sorry, you are not OG.");
     return _isOG;
 };
 
