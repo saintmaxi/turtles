@@ -21,6 +21,10 @@
   #og, #whitelisted {
     font-family: 'Minecraft';
   }
+
+  .hidden {
+    display: none;
+  }
   
   .increment-button {
     width: 15%;

@@ -51,38 +51,41 @@
         <div class="modal-head">
           <div class="text-block">CYBER TURTLES</div>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="mint-tools">
           <div class="div-block" style="text-align: center;">
             <p class="paragraph">Minting 1 Cyber Turtle Genesis NFT will get you access to our games + 1 free mint per future collection. Minting 2 Cyber Turtle NFTs will get you access to our games, our alpha chat + 2 free mints per future collection. Each additional Turtle will act as an extra life in our games.</p>
           </div>
-          <div class="modal-info">
-            <h2 class="heading">Minted</h2>
-            <h2 id="mintedCount" class="heading"><span id="num-minted">-</span> / 5,555</h2>
-          </div>
-          <div class="modal-info">
-            <h2 class="heading">Price</h2>
-            <h2 id="totalMintPrice" class="heading"><span id="current-cost">0.07</span> Ξ</h2>
-          </div>
-          <div>
-            <p class="main-paragraph" id="quantity-controls">
-              <button class="increment-button" id="mint-minus" onclick="decrementClaim();updatePrice();">⊖</button> 
-              <span id="number-to-mint">1</span> 
-              <button class="increment-button" id="mint-plus" onclick="incrementClaim();updatePrice();">⊕</button>
-              <br><br>
-              <button class="site-button w-button" id="max-button" style="background-size: contain; min-height: initial;" onclick="setMaxMint()">MAX</button>
-           </p>
-           <div style="text-align: center;  font-family: Montserrat, sans-serif;">
-            <h2 id="sold-out"></h2>
+          <div id="mint-tools">
+            <div class="modal-info">
+              <h2 class="heading">Minted</h2>
+              <h2 id="mintedCount" class="heading"><span id="num-minted">-</span> / 5,555</h2>
             </div>
-           <div style="text-align: center;  font-family: Montserrat, sans-serif;">
-             <h2 id="whitelisted"></h2>          
-           </div>
+            <div class="modal-info">
+              <h2 class="heading">Price</h2>
+              <h2 id="totalMintPrice" class="heading"><span id="current-cost">0.07</span> Ξ</h2>
+            </div>
+            <div>
+              <p class="main-paragraph" id="quantity-controls">
+                <button class="increment-button" id="mint-minus" onclick="decrementClaim();updatePrice();">⊖</button> 
+                <span id="number-to-mint">1</span> 
+                <button class="increment-button" id="mint-plus" onclick="incrementClaim();updatePrice();">⊕</button>
+                <br><br>
+                <button class="site-button w-button" id="max-button" style="background-size: contain; min-height: initial;" onclick="setMaxMint()">MAX</button>
+             </p>
+             <div style="text-align: center;  font-family: Montserrat, sans-serif;">
+              <h2 id="sold-out"></h2>
+              </div>
+             <div style="text-align: center;  font-family: Montserrat, sans-serif;">
+               <h2 id="whitelisted"></h2>          
+             </div>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button id="mint-button" class="button button-mint w-button" onclick="mint(false)">MINT</button>
-          <button id="mint-n-stake-button" class="button button-mint-stake w-button" onclick="mint(true)">MINT &amp; STAKE</button>
-        </div>
+          <div class="modal-footer">
+            <button id="mint-button" class="button button-mint w-button" onclick="mint(false)">MINT</button>
+            <button id="mint-n-stake-button" class="button button-mint-stake w-button" onclick="mint(true)">MINT &amp; STAKE</button>
+          </div>
+          </div>
+        <div class="mint-info hidden" id="mint-closed" style="text-align: center;"><h2>Minting is currently closed!</h2></div>         
       </div>
     </div>
   </div>

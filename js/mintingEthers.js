@@ -197,10 +197,10 @@ const mint = async(stakeOnMint) => {
         }
     }
     catch (error) {
-        if ((error.message).includes("Amount exceeds available for whitelist!")) {
+        if ((error.message).includes("You dont have enough whitelist mints!!")) {
             await displayErrorMessage(`Error: Max ${MAX_MINT_WL} mints for WL!`)
         }
-        else if ((error.message).includes("You are not Whitelisted")) {
+        else if ((error.message).includes("You are not whitelisted")) {
             await displayErrorMessage(`Error: You are not whitelisted!`)
         }
         else if ((error.message).includes("insufficient funds")) {
