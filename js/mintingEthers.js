@@ -318,9 +318,9 @@ ethereum.on("accountsChanged", async(accounts_)=>{
 
 window.onload = async()=>{
     await updateInfo();
+    await updateMintInfo();
     await checkWhitelistStatus();
     await checkMintingLive();
-    await updateMintInfo();
 };
 
 window.onunload = async()=>{
