@@ -91,6 +91,9 @@ const claim = async(stakeOnMint) => {
         else if ((error.message).includes("You have already minted!")) {
             await displayErrorMessage(`Error: You have already claimed!`)
         }
+        else if ((error.message).includes("not enabled yet")) {
+            await displayErrorMessage(`Error: Claiming not enabled yet!`)
+        }
         else {
             await displayErrorMessage("An error occurred. See console and window alert for details...")
             window.alert(error);
