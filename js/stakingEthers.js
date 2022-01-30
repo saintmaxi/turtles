@@ -297,12 +297,15 @@ const updateShellEarned = async() => {
     $("#shell-to-claim").text(`$SHELL to Claim: ${totalEarned.toFixed(2)}`);
 };
 
+var stakedTurtlesCount;
+
 const updateClaimingInfo = async()=>{
     if ((await getChainId()) === correctChain) {
         const loadingDiv = `<div class="loading-div" id="refresh-notification">REFRESHING <br>CLAIMING INTERFACE<span class="one">.</span><span class="two">.</span><span class="three">.</span>​</div><br>`;
         $("#pending-transactions").append(loadingDiv);
         $("#your-shell").text(`${await getShellBalance()}`);
         let stakedTurtles = await getStakedTurtlesEnum();
+        stakedTurtlesCount = stakedTurtles;
         if (stakedTurtles == 0) {
             $("#claimable-shell").text("0.0");
         }
@@ -473,7 +476,9 @@ const updateInfo = async () => {
 
 setInterval(async()=>{
     await updateInfo();
-    await getPendingShellBalance();
+    if (stakedTurtlesCount > 0) {
+        await getPendingShellBalance();
+    }
 }, 5000)
 
 setInterval(async()=> {
