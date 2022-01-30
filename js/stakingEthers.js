@@ -302,8 +302,13 @@ const updateClaimingInfo = async()=>{
         const loadingDiv = `<div class="loading-div" id="refresh-notification">REFRESHING <br>CLAIMING INTERFACE<span class="one">.</span><span class="two">.</span><span class="three">.</span>​</div><br>`;
         $("#pending-transactions").append(loadingDiv);
         $("#your-shell").text(`${await getShellBalance()}`);
-        await getPendingShellBalance();
         let stakedTurtles = await getStakedTurtlesEnum();
+        if (stakedTurtles == 0) {
+            $("#claimable-shell").text("0.0");
+        }
+        else {
+            await getPendingShellBalance();
+        }
         $("#your-staked-turtles-num").html(`${stakedTurtles}`);
         $("#earn-rate").html(100 * stakedTurtles);
         $("#your-turtles-num").html(`${await getTurtlesEnum()}`);
