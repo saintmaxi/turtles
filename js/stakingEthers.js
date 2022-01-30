@@ -51,7 +51,9 @@ const correctChain = 4;
 if (window.ethereum == undefined) {
     displayErrorMessage('Use a web3 enabled browser with MetaMask or the MetaMask mobile app to claim $SHELL!');
     $("#available-turtle-images").empty();
-    $("#available-turtle-images").append("<br><p>No turtles available...</p>");
+    $("#staked-turtle-images").empty();
+    $("#available-turtle-images").append("<br><h3>No turtles available...</h3>");
+    $("#staked-turtle-images").append("<br><h3>No turtles available...</h3>");
 }
 
 const provider = new ethers.providers.Web3Provider(window.ethereum,"any");
@@ -223,10 +225,14 @@ var currentlyStaked = [];
 const getTurtleImages = async()=>{
     $("#available-turtle-images").empty();
     $("#staked-turtle-images").empty();
+    $("#available-turtle-images").append(`<br><h3>Loading<span class="one">.</span><span class="two">.</span><span class="three">.</span></h3>`);
+    $("#staked-turtle-images").append(`<br><h3>Loading<span class="one">.</span><span class="two">.</span><span class="three">.</span></h3>`);
+
 
     const yourTurtlesCount = await getTurtlesEnum();
     if (yourTurtlesCount == 0) {
-        $("#available-turtle-images").append("<br><p>No turtles available...</p>");
+        $("#available-turtle-images").empty();
+        $("#available-turtle-images").append("<br><h3>No turtles available...</h3>");
     }
     else {
         const yourTurtles = await getTurtlesOwned();
@@ -241,15 +247,18 @@ const getTurtleImages = async()=>{
             batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForStaking(${turtleId})" src="https://cyberturtles.gg/wp-content/uploads/2022/01/Turtle-n-traits-sample-28.png"><p class="turtle-id">#${turtleId}</p></div>`
 
         };
+        $("#available-turtle-images").empty();
         $("#available-turtle-images").append(batchFakeJSX);
     }
 
     const yourStakedTurtlesCount = await getStakedTurtlesEnum();
     if (yourStakedTurtlesCount == 0) {
-        $("#staked-turtle-images").append("<br><p>No turtles available...</p>");
+        $("#staked-turtle-images").empty();
+        $("#staked-turtle-images").append("<br><h3>No turtles available...</h3>");
     }
     else {
         const yourStakedTurtles = await getStakedTurtlesOwned();
+        currentlyStaked = yourStakedTurtles;
         let batchFakeJSX = "";
         for (let i = 0; i < yourStakedTurtles.length; i++) {
             let turtleId = yourStakedTurtles[i];
@@ -262,6 +271,7 @@ const getTurtleImages = async()=>{
             batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForUnstaking(${turtleId})" src="https://cyberturtles.gg/wp-content/uploads/2022/01/Turtle-n-traits-sample-28.png"><p class="turtle-id">#${turtleId}</p><p class="shell-earned"><span id="shell-earned-${turtleId}">${shellEarned}</span></p></div>`
         
         };
+        $("#staked-turtle-images").empty();
         $("#staked-turtle-images").append(batchFakeJSX);
     }
 }
@@ -279,10 +289,10 @@ const getShellEarnedByID = async(id) => {
 const updateShellEarned = async() => {
     let totalEarned = 0;
     for (let i = 0; i < currentlyStaked.length; i++) {
-        let turtleId = currentlyStaked[i];
+        let turtleId = Number(currentlyStaked[i]);
         let shellEarnedByID = await getShellEarnedByID(turtleId);
         $(`#shell-earned-${turtleId}`).text(shellEarnedByID);
-        if (selectedForUnstaking.has(Number(turtleId))) {
+        if (selectedForUnstaking.has(turtleId)) {
             totalEarned += Number(shellEarnedByID);
         }
     };

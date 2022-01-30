@@ -7,7 +7,37 @@
   .your-turtle:hover {
     transform: translate(0, -5px);
   }
-  
+
+  #available-turtle-images, #staked-turtle-images {
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .your-turtle {
+    width: 25%;
+    font-size: 1.3vw;
+    margin: 10px;
+    transition: transform ease 300ms;
+  }
   
   .your-turtle:hover .turtle-id, .your-turtle:hover .shell-earned {
     color: #629658 !important;
@@ -34,4 +64,16 @@
   .active img, .active p{
     border-color: #629658;
     color: #629658 !important;
+  }
+
+@media screen and (max-width: 991px) {
+
+    .your-turtle {
+      width: 41%;
+    }
+
+    .turtle-id, .shell-earned {
+        font-size: 3vh;
+        line-height: 3.2vh;
+    }
   }
