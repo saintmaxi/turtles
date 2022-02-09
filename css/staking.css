@@ -68,12 +68,16 @@
 
 @media screen and (max-width: 991px) {
 
-    .your-turtle {
-      width: 41%;
-    }
+  .hide-on-mobile {
+    display: none !important;
+  }
 
-    .turtle-id, .shell-earned {
+  .your-turtle {
+      width: 41%;
+  }
+
+  .turtle-id, .shell-earned {
         font-size: 3vh;
         line-height: 3.2vh;
-    }
   }
+}

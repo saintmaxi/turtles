@@ -17,7 +17,7 @@ const stakedTurtlesAbi = () => {
     return `[ { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "oldOwner_", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner_", "type": "address" } ], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" } ], "name": "Transfer", "type": "event" }, { "inputs": [], "name": "CT", "outputs": [ { "internalType": "contract iCT", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "CTAddress", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "SHELL", "outputs": [ { "internalType": "contract iShell", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "address_", "type": "address" } ], "name": "balanceOf", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256[]", "name": "tokenIds_", "type": "uint256[]" } ], "name": "claim", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "tokenId_", "type": "uint256" } ], "name": "getPendingTokens", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256[]", "name": "tokenIds_", "type": "uint256[]" } ], "name": "getPendingTokensMany", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "address_", "type": "address" } ], "name": "getPendingTokensOfAddress", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "to_", "type": "address" }, { "internalType": "uint256", "name": "tokenId_", "type": "uint256" } ], "name": "mintStakedTokenAsCyberTurtles", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "tokenId_", "type": "uint256" } ], "name": "ownerOf", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "address_", "type": "address" } ], "name": "setCT", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "address_", "type": "address" } ], "name": "setShell", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "uint256[]", "name": "tokenIds_", "type": "uint256[]" } ], "name": "stakeTurtles", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "bytes4", "name": "interfaceId_", "type": "bytes4" } ], "name": "supportsInterface", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "stateMutability": "pure", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "tokenId_", "type": "uint256" } ], "name": "tokenURI", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "totalSupply", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "newOwner_", "type": "address" } ], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "uint256[]", "name": "tokenIds_", "type": "uint256[]" } ], "name": "unstakeTurtles", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "address_", "type": "address" } ], "name": "walletOfOwner", "outputs": [ { "internalType": "uint256[]", "name": "", "type": "uint256[]" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "yieldEndTime", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "yieldRate", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "yieldStartTime", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" } ]`;
 };
 
-const baseImageURI = "https://ipfs.io/ipfs/QmeFqm6qpJcPR2YFfUCuTH85RjpKapmHcNXqDzvcVwreUw/";
+const baseImageURI = "https://ipfs.io/ipfs/QmTynTQ2dL4etGJTLDMLLsQdJdWSxKE15NG12vTbh1mzPr/";
 
 const etherscanBase = `https://etherscan.io/tx/`;
 const correctChain = 1;
@@ -222,6 +222,14 @@ const unstakeAll = async()=>{
 
 var currentlyStaked = [];
 
+function formatID(id) {
+    let stringID = String(id);
+    while (stringID.length < 4) {
+        stringID = "0" + stringID;
+    }
+    return stringID;
+}
+
 const getTurtleImages = async()=>{
     $("#available-turtle-images").empty();
     $("#staked-turtle-images").empty();
@@ -243,8 +251,7 @@ const getTurtleImages = async()=>{
             if (selectedForStaking.has(Number(turtleId))) {
                 active = "active";
             }
-            // batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForStaking(${turtleId})" src="${baseImageURI}${turtleId}.png"><p class="turtle-id">#${turtleId}</p></div>`
-            batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForStaking(${turtleId})" src="${baseImageURI}"><p class="turtle-id">#${turtleId}</p></div>`            
+            batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForStaking(${turtleId})" src="${baseImageURI}${formatID(turtleId)}.png"><p class="turtle-id">#${turtleId}</p></div>`
         };
         $("#available-turtle-images").empty();
         $("#available-turtle-images").append(batchFakeJSX);
@@ -266,8 +273,7 @@ const getTurtleImages = async()=>{
                 active = "active";
             }
             let shellEarned = Number(formatEther(await stakedTurtles.getPendingTokens(turtleId))).toFixed(2);
-            // batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForUnstaking(${turtleId})" src="${baseImageURI}${turtleId}.png"><p class="turtle-id">#${turtleId}</p><p class="shell-earned"><span id="shell-earned-${turtleId}">${shellEarned}</span></p></div>`
-            batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForUnstaking(${turtleId})" src="${baseImageURI}"><p class="turtle-id">#${turtleId}</p><p class="shell-earned"><span id="shell-earned-${turtleId}">${shellEarned}</span></p></div>`        
+            batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForUnstaking(${turtleId})" src="${baseImageURI}${formatID(turtleId)}.png"><p class="turtle-id">#${turtleId}</p><p class="shell-earned"><span id="shell-earned-${turtleId}">${shellEarned}</span></p></div>`
         };
         $("#staked-turtle-images").empty();
         $("#staked-turtle-images").append(batchFakeJSX);
